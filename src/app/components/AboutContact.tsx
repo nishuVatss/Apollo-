@@ -6,7 +6,7 @@ export function AboutContact() {
       <section className="page-shell">
         <div className="hero-shell">
           <div className="max-w-3xl">
-            <div className="section-kicker mb-5 text-white/90">
+            <div className="section-kicker mb-5 text-cyan-950">
               <Sparkles className="h-4 w-4" />
               About Apollo Athena
             </div>

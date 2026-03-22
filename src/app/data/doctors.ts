@@ -66,36 +66,57 @@ export const doctors: Doctor[] = [
     availability: "By appointment"
   },
   {
-    id: "dr-mehta",
-    name: "Dr. Kavita Mehta",
-    specialty: "Pancreatic Surgery",
-    qualification: "MBBS, MS, MCh (Surgical Oncology)",
+    id: "dr-shefali-sardana",
+    name: "Dr. Shefali Sardana",
+    specialty: "Medical Oncologist, General Physician",
+    qualification: "DNB - Medical Oncology, DNB - General Medicine, MBBS",
     experience: "14+ years",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop",
-    bio: "Dr. Mehta is a specialist in pancreatic and periampullary cancer surgery with exceptional outcomes.",
-    expertise: ["Pancreatic Cancer", "Periampullary Cancer", "Whipple Procedure"],
-    availability: "Mon, Wed, Fri: 9 AM - 3 PM"
+    image: "https://imagesx.practo.com/providers/dr-shefali-sardana-medical-oncologist-delhi-b1513677-e69f-4499-af16-56eb75634523.jpg?i_type=t_70x70",
+    bio: "Dr. Shefali Sardana is a Medical Oncologist and General Physician with 14 years of overall experience, including 10 years as a specialist. She has practiced at major Delhi hospitals including Max Super Speciality Hospital and Max Smart Superspeciality Hospital in Saket. Her training includes DNB Medical Oncology, DNB General Medicine, and MBBS from PGIMS Rohtak. She is known for patient-focused oncology care and experience across cancer screening, cancer treatment planning, thyroid disorders, gynecologic oncology, and urologic oncology support.",
+    expertise: [
+      "Cancer Care & Oncology",
+      "Cancer Screening",
+      "Gynaecologic Oncology",
+      "Urologic Oncology",
+      "Thyroid Disorder Management",
+      "General Medicine"
+    ],
+    availability: "By appointment"
   },
   {
-    id: "dr-singh",
-    name: "Dr. Vikram Singh",
-    specialty: "Biliary Surgery",
-    qualification: "MBBS, MS, FRCS",
+    id: "dr-dipanjan-panda",
+    name: "Dr. Dipanjan Panda",
+    specialty: "Medical Oncologist",
+    qualification: "MBBS, MD - General Medicine, DM - Medical Oncology",
+    experience: "19 years overall",
+    image: "https://imagesx.practo.com/providers/dr-dipanjan-panda-medical-oncologist-delhi-27d88bfb-92c6-4de3-bfbc-c77fe01c613e.jpg?i_type=t_70x70",
+    bio: "Dr. Dipanjan Panda is a senior Medical Oncologist with 19 years of overall experience, including 12 years as a specialist. He serves as Senior Consultant in Medical Oncology at Indraprastha Apollo Hospital and previously led the Medical Oncology department at the Institute of Liver and Biliary Sciences in Delhi. Trained in oncology at AIIMS New Delhi, he also completed a post-doctoral research fellowship at Brigham and Women's Hospital, Harvard Medical School, USA. He is known for clinical leadership in HPB oncology, academic contributions, and evidence-based cancer care.",
+    expertise: [
+      "Medical Oncology",
+      "HPB Oncology",
+      "Liver & Biliary Cancer Care",
+      "Pancreatic Cancer Care",
+      "Academic Oncology",
+      "Evidence-Based Cancer Treatment"
+    ],
+    availability: "By appointment"
+  },
+  {
+    id: "dr-aditi-aggarwal",
+    name: "Dr. Aditi Aggarwal",
+    specialty: "GI Radiation Oncology",
+    qualification: "MBBS, PDCR, MD - Radiation Oncology",
     experience: "16+ years",
-    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop",
-    bio: "Dr. Singh has extensive experience in treating gall bladder and biliary cancer with advanced techniques.",
-    expertise: ["Gall Bladder Cancer", "Biliary Cancer", "Laparoscopic Surgery"],
-    availability: "Tue, Thu, Sat: 9 AM - 5 PM"
-  },
-  {
-    id: "dr-reddy",
-    name: "Dr. Anjali Reddy",
-    specialty: "Medical Oncology",
-    qualification: "MBBS, MD, DM (Medical Oncology)",
-    experience: "10+ years",
-    image: "https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=400&h=400&fit=crop",
-    bio: "Dr. Reddy focuses on comprehensive cancer care including chemotherapy and immunotherapy.",
-    expertise: ["Chemotherapy", "Immunotherapy", "Targeted Therapy"],
-    availability: "Mon - Fri: 10 AM - 6 PM"
+    image: "https://www.apollohospitals.com/sites/default/files/2026-02/dr-aditi-agarwal-updated.jpg",
+    bio: "Dr. Aditi Aggarwal is a distinguished Radiation Oncologist with more than 16 years of experience delivering precision-driven cancer care for adults and children. Trained at premier institutions including Tata Memorial Hospital and AIIMS-affiliated centres, she specialises in gastrointestinal and genitourinary cancers with a strong focus on organ preservation and long-term quality of life. Her expertise spans advanced radiation techniques including IMRT, VMAT, IGRT, SBRT, SRS, and motion management, combining high-precision treatment with compassionate multidisciplinary care.",
+    expertise: [
+      "GI Radiation Oncology",
+      "Genitourinary Cancer Radiation",
+      "IMRT, VMAT & IGRT",
+      "SBRT, SRS & DIBH",
+      "Adult & Paediatric Malignancies",
+      "Survivorship-Focused Care"
+    ],
+    availability: "Delhi: Mon - Sat, 09:00 - 13:00 | Athenaa: Tue & Thu, 09:00 - 11:00"
   }
 ];

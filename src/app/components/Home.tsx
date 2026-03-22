@@ -68,7 +68,7 @@ export function Home() {
           <div className="floating-orb right-8 top-10 h-24 w-24 bg-amber-200/20" />
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div className="max-w-3xl">
-              <div className="section-kicker mb-5 text-white/90">
+              <div className="section-kicker mb-5 text-cyan-950">
                 <Sparkles className="h-4 w-4" />
                 Modern cancer care, built around reassurance
               </div>
@@ -205,7 +205,7 @@ export function Home() {
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {doctors.slice(0, 3).map((doctor) => (
+            {doctors.slice(0, 6).map((doctor) => (
               <Link
                 key={doctor.id}
                 to={`/doctors/${doctor.id}`}
@@ -265,7 +265,7 @@ export function Home() {
       <section className="page-shell">
         <div className="hero-shell py-12 text-center md:py-14">
           <div className="relative mx-auto max-w-3xl">
-            <div className="section-kicker mx-auto mb-4 text-white/90">
+            <div className="section-kicker mx-auto mb-4 text-cyan-950">
               <Heart className="h-4 w-4" />
               Start your healing journey
             </div>

@@ -38,7 +38,7 @@ export const treatments: Treatment[] = [
       "Radiation Therapy",
       "Targeted Therapy"
     ],
-    specialists: ["Dr. Rajesh Sharma", "Dr. Anjali Reddy"],
+    specialists: ["Dr. Nikhil Aggarwal", "Dr. Asit Arora"],
     icon: "🎗️"
   },
   {
@@ -69,7 +69,7 @@ export const treatments: Treatment[] = [
       "Radiation Therapy",
       "Immunotherapy"
     ],
-    specialists: ["Dr. Priya Patel", "Dr. Anjali Reddy"],
+    specialists: ["Dr. Asit Arora", "Dr. Aditi Aggarwal"],
     icon: "🫀"
   },
   {
@@ -101,7 +101,7 @@ export const treatments: Treatment[] = [
       "Targeted Therapy",
       "Immunotherapy"
     ],
-    specialists: ["Dr. Anil Kumar", "Dr. Anjali Reddy"],
+    specialists: ["Dr. Asit Arora", "Dr. Dipanjan Panda"],
     icon: "🫁"
   },
   {
@@ -133,7 +133,7 @@ export const treatments: Treatment[] = [
       "Radiation Therapy",
       "Palliative Care"
     ],
-    specialists: ["Dr. Vikram Singh", "Dr. Anil Kumar"],
+    specialists: ["Dr. Nikhil Aggarwal", "Dr. Dipanjan Panda"],
     icon: "💚"
   },
   {
@@ -165,7 +165,7 @@ export const treatments: Treatment[] = [
       "Targeted Therapy",
       "Palliative Care"
     ],
-    specialists: ["Dr. Kavita Mehta", "Dr. Anjali Reddy"],
+    specialists: ["Dr. Nikhil Aggarwal", "Dr. Shefali Sardana"],
     icon: "🩺"
   },
   {
@@ -194,7 +194,7 @@ export const treatments: Treatment[] = [
       "Robotic hepatobiliary procedures",
       "Post-operative recovery planning"
     ],
-    specialists: ["Dr. Rajesh Sharma", "Dr. Anil Kumar"],
+    specialists: ["Dr. Nikhil Aggarwal", "Dr. Asit Arora"],
     icon: "🤖"
   }
 ];

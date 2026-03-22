@@ -8,7 +8,7 @@ export function Doctors() {
       <section className="page-shell">
         <div className="hero-shell">
           <div className="max-w-3xl">
-            <div className="section-kicker mb-5 text-white/90">
+            <div className="section-kicker mb-5 text-cyan-950">
               <Sparkles className="h-4 w-4" />
               Our specialist team
             </div>
@@ -22,7 +22,7 @@ export function Doctors() {
 
       <section className="page-shell py-16 md:py-24">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {doctors.slice(0, 3).map((doctor) => (
+          {doctors.slice(0, 6).map((doctor) => (
             <Link
               key={doctor.id}
               to={`/doctors/${doctor.id}`}
