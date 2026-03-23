@@ -43,6 +43,25 @@ export function Treatments() {
 
               <div className="space-y-4">
                 <div>
+                  <h4 className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Subcategories</h4>
+                  <div className="grid gap-2">
+                    {treatment.subcategories.slice(0, 3).map((subcategory) => (
+                      <div
+                        key={subcategory.id}
+                        className="rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 transition-all duration-300 group-hover:border-cyan-300 group-hover:bg-white group-hover:shadow-[0_12px_28px_rgba(14,116,144,0.12)]"
+                      >
+                        <div className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700 group-hover:text-cyan-700">
+                          {subcategory.name}
+                        </div>
+                        <p className="mt-1 line-clamp-2 text-sm text-slate-600 group-hover:text-slate-700">
+                          {subcategory.summary}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
                   <h4 className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Key Symptoms</h4>
                   <div className="flex flex-wrap gap-2">
                     {treatment.symptoms.slice(0, 3).map((symptom) => (
@@ -66,7 +85,7 @@ export function Treatments() {
               </div>
 
               <div className="mt-6 border-t border-cyan-100 pt-5 text-sm font-semibold text-cyan-700">
-                Learn more about this treatment
+                Open treatment and subcategory details
               </div>
             </Link>
           ))}

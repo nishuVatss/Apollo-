@@ -1,80 +1,128 @@
-export interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  date: string;
-  category: string;
-  image: string;
-  readTime: string;
-}
+import type { BlogPost, BlogRow } from "../types/blog";
 
-export const blogPosts: BlogPost[] = [
+export const fallbackBlogPosts: BlogPost[] = [
   {
     id: "early-detection-saves-lives",
+    slug: "early-detection-saves-lives",
     title: "Early Detection Saves Lives: The Importance of Cancer Screening",
     excerpt: "Learn why regular cancer screenings are crucial for early detection and successful treatment outcomes.",
-    content: "Early detection through regular screening can significantly improve cancer treatment outcomes. At Apollo Athena, we recommend age-appropriate screening protocols for all our patients...",
+    content: "Early detection through regular screening can significantly improve cancer treatment outcomes. At Apollo Athena, we recommend age-appropriate screening protocols for all our patients and build an individualized follow-up plan for every risk profile.",
     author: "Dr. Rajesh Sharma",
-    date: "March 15, 2026",
     category: "Prevention",
     image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800&h=400&fit=crop",
-    readTime: "5 min read"
+    readTime: "5 min read",
+    readTimeMinutes: 5,
+    pinned: true,
+    published: true,
+    createdAt: "2026-03-15T00:00:00.000Z",
+    updatedAt: "2026-03-15T00:00:00.000Z",
+    publishedAt: "2026-03-15T00:00:00.000Z",
   },
   {
     id: "robotic-surgery-advances",
+    slug: "robotic-surgery-advances",
     title: "Advances in Robotic Surgery for Cancer Treatment",
     excerpt: "Discover how robotic surgery is revolutionizing cancer treatment with minimal invasiveness.",
-    content: "Robotic surgery represents a significant advancement in surgical oncology, offering precision, minimal invasiveness, and faster recovery times...",
+    content: "Robotic surgery represents a significant advancement in surgical oncology, offering precision, minimal invasiveness, and faster recovery times for carefully selected patients.",
     author: "Dr. Priya Patel",
-    date: "March 10, 2026",
     category: "Technology",
     image: "https://images.unsplash.com/photo-1581594549595-35f6edc7b762?w=800&h=400&fit=crop",
-    readTime: "7 min read"
+    readTime: "7 min read",
+    readTimeMinutes: 7,
+    pinned: false,
+    published: true,
+    createdAt: "2026-03-10T00:00:00.000Z",
+    updatedAt: "2026-03-10T00:00:00.000Z",
+    publishedAt: "2026-03-10T00:00:00.000Z",
   },
   {
     id: "nutrition-during-cancer",
+    slug: "nutrition-during-cancer",
     title: "Nutrition Guidelines for Cancer Patients",
     excerpt: "Expert advice on maintaining proper nutrition during cancer treatment for better outcomes.",
-    content: "Proper nutrition plays a vital role in cancer treatment and recovery. Our nutritionists work closely with oncologists to create personalized diet plans...",
+    content: "Proper nutrition plays a vital role in cancer treatment and recovery. Our nutritionists work closely with oncologists to create personalized diet plans that support energy, immunity, and healing.",
     author: "Dr. Anjali Reddy",
-    date: "March 5, 2026",
     category: "Wellness",
     image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=400&fit=crop",
-    readTime: "6 min read"
+    readTime: "6 min read",
+    readTimeMinutes: 6,
+    pinned: false,
+    published: true,
+    createdAt: "2026-03-05T00:00:00.000Z",
+    updatedAt: "2026-03-05T00:00:00.000Z",
+    publishedAt: "2026-03-05T00:00:00.000Z",
   },
   {
     id: "immunotherapy-breakthrough",
+    slug: "immunotherapy-breakthrough",
     title: "Immunotherapy: A New Hope in Cancer Treatment",
     excerpt: "Understanding how immunotherapy harnesses your body's immune system to fight cancer.",
-    content: "Immunotherapy has emerged as a groundbreaking treatment option for various cancers. By boosting the body's natural defenses, we can achieve remarkable results...",
+    content: "Immunotherapy has emerged as a groundbreaking treatment option for various cancers. By boosting the body's natural defenses, clinicians can achieve meaningful results for certain tumor types.",
     author: "Dr. Anil Kumar",
-    date: "February 28, 2026",
     category: "Treatment",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop",
-    readTime: "8 min read"
+    readTime: "8 min read",
+    readTimeMinutes: 8,
+    pinned: false,
+    published: true,
+    createdAt: "2026-02-28T00:00:00.000Z",
+    updatedAt: "2026-02-28T00:00:00.000Z",
+    publishedAt: "2026-02-28T00:00:00.000Z",
   },
   {
     id: "patient-success-story",
+    slug: "patient-success-story",
     title: "Patient Success Story: Overcoming Pancreatic Cancer",
     excerpt: "Read an inspiring story of hope and recovery from one of our pancreatic cancer survivors.",
-    content: "Meet Mrs. Sharma, a pancreatic cancer survivor who underwent successful treatment at Apollo Athena. Her journey of courage and determination...",
+    content: "Meet Mrs. Sharma, a pancreatic cancer survivor who underwent successful treatment at Apollo Athena. Her story highlights the power of coordinated care, family support, and early intervention.",
     author: "Dr. Kavita Mehta",
-    date: "February 20, 2026",
     category: "Patient Stories",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop",
-    readTime: "10 min read"
+    readTime: "10 min read",
+    readTimeMinutes: 10,
+    pinned: false,
+    published: true,
+    createdAt: "2026-02-20T00:00:00.000Z",
+    updatedAt: "2026-02-20T00:00:00.000Z",
+    publishedAt: "2026-02-20T00:00:00.000Z",
   },
   {
     id: "liver-health-tips",
+    slug: "liver-health-tips",
     title: "10 Tips for Maintaining a Healthy Liver",
     excerpt: "Simple lifestyle changes that can help protect your liver and reduce cancer risk.",
-    content: "Your liver is one of the most vital organs in your body. Here are ten evidence-based tips to keep it healthy and functioning optimally...",
+    content: "Your liver is one of the most vital organs in your body. These evidence-based habits can help support liver health and reduce avoidable risk factors over time.",
     author: "Dr. Vikram Singh",
-    date: "February 15, 2026",
     category: "Prevention",
     image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&h=400&fit=crop",
-    readTime: "5 min read"
-  }
+    readTime: "5 min read",
+    readTimeMinutes: 5,
+    pinned: false,
+    published: true,
+    createdAt: "2026-02-15T00:00:00.000Z",
+    updatedAt: "2026-02-15T00:00:00.000Z",
+    publishedAt: "2026-02-15T00:00:00.000Z",
+  },
 ];
+
+export function mapBlogRow(row: BlogRow): BlogPost {
+  const readTimeMinutes = row.read_time_minutes ?? 5;
+
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt,
+    content: row.content,
+    author: row.author,
+    category: row.category,
+    image: row.cover_image_url,
+    readTime: `${readTimeMinutes} min read`,
+    readTimeMinutes,
+    pinned: row.pinned ?? false,
+    published: row.published ?? false,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    publishedAt: row.published_at,
+  };
+}

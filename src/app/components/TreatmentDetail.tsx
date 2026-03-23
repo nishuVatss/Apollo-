@@ -129,6 +129,23 @@ export function TreatmentDetail() {
                   ))}
                 </div>
               </div>
+
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Subcategories</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {treatment.subcategories.map((subcategory) => (
+                    <Link
+                      key={subcategory.id}
+                      to={`/treatments/${treatment.id}/${subcategory.id}`}
+                      className="block rounded-2xl border border-cyan-100 bg-cyan-50/50 p-5 transition hover:border-cyan-300 hover:bg-cyan-50"
+                    >
+                      <h3 className="text-lg font-bold text-gray-900">{subcategory.name}</h3>
+                      <p className="mt-2 text-sm leading-6 text-gray-700">{subcategory.summary}</p>
+                      <div className="mt-4 text-sm font-semibold text-cyan-700">Open details</div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Sidebar */}
