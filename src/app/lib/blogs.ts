@@ -101,6 +101,13 @@ export async function fetchPublishedBlogs() {
     throw error;
   }
 
+  if (!data || data.length === 0) {
+    return {
+      posts: sortByPinnedAndNewest([...fallbackBlogPosts]),
+      usingFallback: true,
+    };
+  }
+
   return {
     posts: sortByPinnedAndNewest(((data ?? []) as BlogRow[]).map(mapBlogRow)),
     usingFallback: false,
@@ -140,5 +147,9 @@ export async function fetchPublishedBlogBySlug(slug: string) {
     throw error;
   }
 
-  return data ? mapBlogRow(data as BlogRow) : null;
+  if (!data) {
+    return fallbackBlogPosts.find((post) => post.slug === slug && post.published) ?? null;
+  }
+
+  return mapBlogRow(data as BlogRow);
 }

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
 import { Doctors } from "./components/Doctors";
@@ -9,10 +9,12 @@ import { TreatmentDetail } from "./components/TreatmentDetail";
 import { Treatments } from "./components/Treatments";
 import { NotFound } from "./components/NotFound";
 import { AdminLogin } from "./components/AdminLogin";
-import { AdminPanel } from "./components/AdminPanel";
 import { AdminRoute } from "./components/AdminRoute";
 import { BlogDetail } from "./components/BlogDetail";
 import { TreatmentSubcategoryDetail } from "./components/TreatmentSubcategoryDetail";
+import { AdminShell } from "./components/AdminShell";
+import { AdminArticlesPage } from "./components/AdminArticlesPage";
+import { AdminLeadsPage } from "./components/AdminLeadsPage";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +34,16 @@ export const router = createBrowserRouter([
       {
         path: "admin",
         Component: AdminRoute,
-        children: [{ index: true, Component: AdminPanel }],
+        children: [
+          {
+            Component: AdminShell,
+            children: [
+              { index: true, element: <Navigate to="/admin/articles" replace /> },
+              { path: "articles", Component: AdminArticlesPage },
+              { path: "leads", Component: AdminLeadsPage },
+            ],
+          },
+        ],
       },
       { path: "*", Component: NotFound },
     ],

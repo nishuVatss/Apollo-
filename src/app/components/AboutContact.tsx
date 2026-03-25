@@ -1,6 +1,69 @@
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { MapPin, Phone, Mail, Clock, Send, Sparkles, ShieldCheck, HeartHandshake } from "lucide-react";
+import { hasSupabaseEnv, supabase } from "../lib/supabase";
+
+interface ContactFormState {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+const initialContactFormState: ContactFormState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  subject: "Book an Appointment",
+  message: "",
+};
 
 export function AboutContact() {
+  const [form, setForm] = useState<ContactFormState>(initialContactFormState);
+  const [submitting, setSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  function handleFieldChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!hasSupabaseEnv || !supabase) {
+      setErrorMessage("Contact form storage is not configured yet.");
+      setSuccessMessage("");
+      return;
+    }
+
+    setSubmitting(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
+    const { error } = await supabase.from("contact_submissions").insert({
+      first_name: form.firstName.trim(),
+      last_name: form.lastName.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      subject: form.subject.trim(),
+      message: form.message.trim(),
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+      setSubmitting(false);
+      return;
+    }
+
+    setForm(initialContactFormState);
+    setSuccessMessage("Your message has been received. Our team will contact you soon.");
+    setSubmitting(false);
+  }
+
   return (
     <div className="w-full py-4 pb-10 md:py-6">
       <section className="page-shell">
@@ -49,26 +112,10 @@ export function AboutContact() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <img
-              src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop"
-              alt="Hospital facility"
-              className="h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=400&h=300&fit=crop"
-              alt="Medical equipment"
-              className="mt-6 h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=400&h=300&fit=crop"
-              alt="Medical team"
-              className="h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=400&h=300&fit=crop"
-              alt="Patient care"
-              className="mt-6 h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64"
-            />
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop" alt="Hospital facility" className="h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64" />
+            <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=400&h=300&fit=crop" alt="Medical equipment" className="mt-6 h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64" />
+            <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=400&h=300&fit=crop" alt="Medical team" className="h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64" />
+            <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=400&h=300&fit=crop" alt="Patient care" className="mt-6 h-56 w-full rounded-[1.75rem] object-cover shadow-[0_18px_36px_rgba(23,49,62,0.14)] sm:h-64" />
           </div>
         </div>
       </section>
@@ -78,30 +125,12 @@ export function AboutContact() {
           <h2 className="mb-10 text-center text-3xl font-bold text-slate-900">Our Core Values</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {[
-              {
-                title: "Excellence",
-                description: "Advanced medical care supported by rigorous clinical standards.",
-              },
-              {
-                title: "Compassion",
-                description: "Empathy, dignity, and patient comfort built into the experience.",
-              },
-              {
-                title: "Innovation",
-                description: "Modern diagnostics and evolving treatment strategies where they help.",
-              },
-              {
-                title: "Integrity",
-                description: "Clear communication and ethical medical practice at every stage.",
-              },
-              {
-                title: "Collaboration",
-                description: "Multidisciplinary teamwork for more complete treatment planning.",
-              },
-              {
-                title: "Hope",
-                description: "A care model that supports confidence as well as recovery.",
-              },
+              { title: "Excellence", description: "Advanced medical care supported by rigorous clinical standards." },
+              { title: "Compassion", description: "Empathy, dignity, and patient comfort built into the experience." },
+              { title: "Innovation", description: "Modern diagnostics and evolving treatment strategies where they help." },
+              { title: "Integrity", description: "Clear communication and ethical medical practice at every stage." },
+              { title: "Collaboration", description: "Multidisciplinary teamwork for more complete treatment planning." },
+              { title: "Hope", description: "A care model that supports confidence as well as recovery." },
             ].map((value, idx) => (
               <div key={value.title} className="lift-card rounded-[1.5rem] border border-cyan-100 bg-white p-6 shadow-[0_12px_28px_rgba(23,49,62,0.08)]">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0e7490,#14b8a6_55%,#fb7185)] text-lg font-bold text-white">
@@ -128,57 +157,34 @@ export function AboutContact() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="rounded-2xl bg-cyan-50 p-3">
-                    <MapPin className="h-6 w-6 text-cyan-700" />
-                  </div>
+                  <div className="rounded-2xl bg-cyan-50 p-3"><MapPin className="h-6 w-6 text-cyan-700" /></div>
                   <div>
                     <h4 className="mb-1 font-semibold text-slate-900">Address</h4>
-                    <p className="text-slate-600">
-                      Apollo Women's Cancer Centre<br />
-                      Block E, Defence Colony<br />
-                      New Delhi, Delhi 110024
-                    </p>
+                    <p className="text-slate-600">Apollo Women's Cancer Centre<br />Block E, Defence Colony<br />New Delhi, Delhi 110024</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="rounded-2xl bg-emerald-50 p-3">
-                    <Phone className="h-6 w-6 text-emerald-600" />
-                  </div>
+                  <div className="rounded-2xl bg-emerald-50 p-3"><Phone className="h-6 w-6 text-emerald-600" /></div>
                   <div>
                     <h4 className="mb-1 font-semibold text-slate-900">Phone</h4>
-                    <p className="text-slate-600">
-                      Main: 080 6297 2813
-                    </p>
+                    <p className="text-slate-600">Main: 080 6297 2813</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="rounded-2xl bg-rose-50 p-3">
-                    <Mail className="h-6 w-6 text-rose-600" />
-                  </div>
+                  <div className="rounded-2xl bg-rose-50 p-3"><Mail className="h-6 w-6 text-rose-600" /></div>
                   <div>
                     <h4 className="mb-1 font-semibold text-slate-900">Email</h4>
-                    <p className="text-slate-600">
-                      General: contact@apolloathena.com<br />
-                      Appointments: appointments@apolloathena.com<br />
-                      Support: support@apolloathena.com
-                    </p>
+                    <p className="text-slate-600">General: contact@apolloathena.com<br />Appointments: appointments@apolloathena.com<br />Support: support@apolloathena.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="rounded-2xl bg-amber-50 p-3">
-                    <Clock className="h-6 w-6 text-amber-600" />
-                  </div>
+                  <div className="rounded-2xl bg-amber-50 p-3"><Clock className="h-6 w-6 text-amber-600" /></div>
                   <div>
                     <h4 className="mb-1 font-semibold text-slate-900">Working Hours</h4>
-                    <p className="text-slate-600">
-                      Monday - Friday: 8:00 AM - 8:00 PM<br />
-                      Saturday: 9:00 AM - 6:00 PM<br />
-                      Sunday: 10:00 AM - 4:00 PM<br />
-                      <span className="font-semibold text-rose-600">Emergency: 24/7</span>
-                    </p>
+                    <p className="text-slate-600">Monday - Friday: 8:00 AM - 8:00 PM<br />Saturday: 9:00 AM - 6:00 PM<br />Sunday: 10:00 AM - 4:00 PM<br /><span className="font-semibold text-rose-600">Emergency: 24/7</span></p>
                   </div>
                 </div>
               </div>
@@ -186,58 +192,45 @@ export function AboutContact() {
 
             <div className="hero-shell py-8 text-white">
               <h3 className="mb-3 text-xl font-bold">24/7 Emergency Services</h3>
-              <p className="mb-4 text-cyan-50">
-                Our emergency department is always ready to provide immediate medical attention for urgent cancer-related issues.
-              </p>
-              <a href="tel:08062972813" className="cta-primary bg-white text-cyan-800">
-                Call Now: 080 6297 2813
-              </a>
+              <p className="mb-4 text-cyan-50">Our emergency department is always ready to provide immediate medical attention for urgent cancer-related issues.</p>
+              <a href="tel:08062972813" className="cta-primary bg-white text-cyan-800">Call Now: 080 6297 2813</a>
             </div>
           </div>
 
           <div className="surface-card p-8">
             <h3 className="mb-6 text-2xl font-bold text-slate-900">Send us a Message</h3>
-            <form className="space-y-6">
+
+            {(successMessage || errorMessage) && (
+              <div className={`mb-6 rounded-3xl px-5 py-4 text-sm ${errorMessage ? "border border-rose-200 bg-rose-50 text-rose-700" : "border border-emerald-200 bg-emerald-50 text-emerald-700"}`}>
+                {errorMessage || successMessage}
+              </div>
+            )}
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-700">First Name *</label>
-                  <input
-                    type="text"
-                    className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none"
-                    placeholder="John"
-                  />
+                  <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="firstName">First Name *</label>
+                  <input id="firstName" name="firstName" type="text" value={form.firstName} onChange={handleFieldChange} className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none" placeholder="John" required />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-700">Last Name *</label>
-                  <input
-                    type="text"
-                    className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none"
-                    placeholder="Doe"
-                  />
+                  <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="lastName">Last Name *</label>
+                  <input id="lastName" name="lastName" type="text" value={form.lastName} onChange={handleFieldChange} className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none" placeholder="Doe" required />
                 </div>
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">Email *</label>
-                <input
-                  type="email"
-                  className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none"
-                  placeholder="john.doe@example.com"
-                />
+                <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="email">Email *</label>
+                <input id="email" name="email" type="email" value={form.email} onChange={handleFieldChange} className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none" placeholder="john.doe@example.com" required />
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">Phone Number *</label>
-                <input
-                  type="tel"
-                  className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none"
-                  placeholder="+91 98765 43210"
-                />
+                <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="phone">Phone Number *</label>
+                <input id="phone" name="phone" type="tel" value={form.phone} onChange={handleFieldChange} className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none" placeholder="+91 98765 43210" required />
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">Subject *</label>
-                <select className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none">
+                <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="subject">Subject *</label>
+                <select id="subject" name="subject" value={form.subject} onChange={handleFieldChange} className="min-h-12 w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none" required>
                   <option>Book an Appointment</option>
                   <option>General Inquiry</option>
                   <option>Medical Records Request</option>
@@ -247,20 +240,13 @@ export function AboutContact() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">Message *</label>
-                <textarea
-                  rows={5}
-                  className="w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none"
-                  placeholder="Please provide details about your inquiry..."
-                />
+                <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="message">Message *</label>
+                <textarea id="message" name="message" rows={5} value={form.message} onChange={handleFieldChange} className="w-full rounded-2xl border border-cyan-100 bg-white px-4 py-3 focus:border-cyan-400 focus:outline-none" placeholder="Please provide details about your inquiry..." required />
               </div>
 
-              <button
-                type="submit"
-                className="cta-primary w-full justify-center rounded-2xl px-8 py-4"
-              >
+              <button type="submit" className="cta-primary w-full justify-center rounded-2xl px-8 py-4 disabled:cursor-not-allowed disabled:opacity-70" disabled={submitting}>
                 <Send className="mr-2 h-5 w-5" />
-                Send Message
+                {submitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>

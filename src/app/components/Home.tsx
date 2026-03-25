@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import {
   ArrowRight,
@@ -14,10 +15,10 @@ import { treatments } from "../data/treatments";
 import { doctors } from "../data/doctors";
 
 const stats = [
-  { icon: Users, value: "10,000+", label: "Patients supported" },
-  { icon: Award, value: "15+", label: "Years in oncology care" },
-  { icon: Stethoscope, value: "50+", label: "Specialists and surgeons" },
-  { icon: Heart, value: "95%", label: "Patient trust score" },
+  { icon: Users, value: 10000, label: "Patients supported", suffix: "+" },
+  { icon: Award, value: 15, label: "Years in oncology care", suffix: "+" },
+  { icon: Stethoscope, value: 50, label: "Specialists and surgeons", suffix: "+" },
+  { icon: Heart, value: 95, label: "Patient trust score", suffix: "%" },
 ];
 
 const journeyHighlights = [
@@ -58,6 +59,67 @@ const features = [
     description: "Care navigation from first consultation through treatment follow-up and survivorship.",
   },
 ];
+
+function CountUpNumber({ value, suffix }: { value: number; suffix: string }) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const elementRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element || hasAnimated) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) {
+          return;
+        }
+
+        setHasAnimated(true);
+        observer.disconnect();
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  useEffect(() => {
+    if (!hasAnimated) {
+      return;
+    }
+
+    const duration = 1400;
+    const startTime = performance.now();
+
+    let frameId = 0;
+
+    const updateValue = (currentTime: number) => {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(value * easedProgress));
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(updateValue);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(updateValue);
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [hasAnimated, value]);
+
+  return (
+    <div ref={elementRef} className="text-2xl font-bold text-slate-900 sm:text-3xl">
+      {displayValue.toLocaleString()}{suffix}
+    </div>
+  );
+}
 
 export function Home() {
   return (
@@ -132,7 +194,7 @@ export function Home() {
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,rgba(14,116,144,0.14),rgba(251,113,133,0.16))]">
                 <stat.icon className="h-7 w-7 text-cyan-700" />
               </div>
-              <div className="text-2xl font-bold text-slate-900 sm:text-3xl">{stat.value}</div>
+              <CountUpNumber value={stat.value} suffix={stat.suffix} />
               <div className="mt-1 text-sm text-slate-600">{stat.label}</div>
             </div>
           ))}
