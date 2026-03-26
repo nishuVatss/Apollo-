@@ -123,47 +123,49 @@ function CountUpNumber({ value, suffix }: { value: number; suffix: string }) {
 
 export function Home() {
   return (
-    <div className="w-full py-4 pb-10 md:py-6">
+    <div className="w-full py-3 pb-10 md:py-6">
       <section className="page-shell">
         <div className="hero-shell">
           <div className="floating-orb -left-6 top-16 h-28 w-28 bg-white/20" />
           <div className="floating-orb right-8 top-10 h-24 w-24 bg-amber-200/20" />
-          <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <div className="max-w-3xl">
-              <div className="section-kicker mb-5 text-cyan-950">
+          <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-10">
+            <div className="min-w-0 max-w-3xl">
+              <div className="section-kicker mb-4 w-full max-w-full flex-wrap text-[11px] leading-4 text-cyan-950 sm:text-xs">
                 <Sparkles className="h-4 w-4" />
-                Modern cancer care, built around reassurance
+                <span className="min-w-0 break-words">
+                  Modern cancer care, built around reassurance
+                </span>
               </div>
-              <h1 className="mb-5 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="mb-4 max-w-3xl break-words text-[2rem] font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
                 Precision treatment in a calmer, more human healing environment.
               </h1>
-              <p className="mb-8 max-w-2xl text-base leading-7 text-cyan-50 sm:text-lg">
+              <p className="mb-6 max-w-2xl text-[15px] leading-6 text-cyan-50 sm:mb-8 sm:text-lg sm:leading-7">
                 Apollo Athena combines expert oncology, modern surgical care, and ongoing patient support in one connected hospital experience across desktop and mobile touchpoints.
               </p>
-              <div className="mb-8 flex flex-col gap-4 sm:flex-row">
-                <Link to="/about" className="cta-primary">
+              <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:gap-4">
+                <Link to="/about" className="cta-primary w-full sm:w-auto">
                   Book an Appointment
                 </Link>
-                <Link to="/doctors" className="cta-secondary text-white">
+                <Link to="/doctors" className="cta-secondary w-full text-white sm:w-auto">
                   Meet Our Doctors
                 </Link>
               </div>
-              <div className="chip-row">
+              <div className="chip-row max-w-full">
                 {journeyHighlights.map((item) => (
-                  <div key={item} className="rounded-full border border-white/30 bg-white/12 px-4 py-2 text-sm text-white backdrop-blur-md">
+                  <div key={item} className="shrink-0 whitespace-nowrap rounded-full border border-white/30 bg-white/12 px-4 py-2 text-sm text-white backdrop-blur-md">
                     {item}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="surface-card soft-grid p-5 sm:p-6">
-              <div className="mb-4 flex items-center justify-between">
+            <div className="min-w-0 surface-card soft-grid p-5 sm:p-6">
+              <div className="mb-4 flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-800">Patient Journey</p>
-                  <h2 className="mt-2 text-2xl font-bold text-slate-900">Care that feels guided, not overwhelming</h2>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-800 sm:text-sm">Patient Journey</p>
+                  <h2 className="mt-2 text-xl font-bold text-slate-900 sm:text-2xl">Care that feels guided, not overwhelming</h2>
                 </div>
-                <Activity className="h-9 w-9 text-rose-500" />
+                <Activity className="mt-1 h-8 w-8 flex-shrink-0 text-rose-500 sm:h-9 sm:w-9" />
               </div>
               <div className="space-y-4">
                 {[

@@ -11,7 +11,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,6 +31,12 @@ export function Layout() {
     }
     return location.pathname.startsWith(href);
   };
+
+  const showMobileSupportBar = !location.pathname.startsWith("/about") && location.pathname !== "/";
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col text-slate-900">
@@ -60,16 +66,18 @@ export function Layout() {
             </div>
           </div>
 
-          <nav className="flex items-center justify-between py-4">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#0e7490,#14b8a6_55%,#fb7185)] shadow-[0_20px_45px_rgba(14,116,144,0.28)]">
-                <HeartPulse className="h-6 w-6 text-white" />
+          <nav className="flex items-center justify-between py-3 sm:py-4">
+            <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#0e7490,#14b8a6_55%,#fb7185)] shadow-[0_20px_45px_rgba(14,116,144,0.28)] sm:h-12 sm:w-12">
+                <HeartPulse className="h-5 w-5 text-white sm:h-6 sm:w-6" />
               </div>
-              <div>
-                <h1 className="bg-gradient-to-r from-cyan-800 via-teal-700 to-rose-500 bg-clip-text text-xl font-bold text-transparent sm:text-2xl">
+              <div className="min-w-0">
+                <h1 className="truncate bg-gradient-to-r from-cyan-800 via-teal-700 to-rose-500 bg-clip-text text-lg font-bold text-transparent sm:text-2xl">
                   Apollo Athena
                 </h1>
-                <p className="text-xs text-slate-500">Precision oncology with compassionate care</p>
+                <p className="hidden text-xs leading-tight text-slate-500 min-[380px]:block">
+                  Precision oncology with compassionate care
+                </p>
               </div>
             </Link>
 
@@ -94,7 +102,7 @@ export function Layout() {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="rounded-2xl border border-white/60 bg-white/80 p-3 text-slate-700 shadow-[0_12px_24px_rgba(23,49,62,0.08)] transition-colors hover:bg-white lg:hidden"
+              className="flex-shrink-0 rounded-2xl border border-white/60 bg-white/80 p-3 text-slate-700 shadow-[0_12px_24px_rgba(23,49,62,0.08)] transition-colors hover:bg-white lg:hidden"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -105,15 +113,6 @@ export function Layout() {
         {mobileMenuOpen && (
           <div className="border-t border-white/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(243,251,252,0.94))] lg:hidden">
             <div className="page-shell space-y-3 py-4">
-              <div className="surface-card p-3">
-                <div className="mb-3 flex items-center justify-between rounded-2xl bg-[linear-gradient(135deg,rgba(14,116,144,0.1),rgba(251,113,133,0.1))] p-4">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">Care Navigator</p>
-                    <p className="mt-1 text-sm text-slate-600">Quick access for appointments and specialist discovery.</p>
-                  </div>
-                  <ChevronRight className="h-5 w-5 text-cyan-700" />
-                </div>
-              </div>
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -137,7 +136,7 @@ export function Layout() {
         )}
       </header>
 
-      <main className="flex-1 pb-20 lg:pb-0">
+      <main className={`flex-1 ${showMobileSupportBar ? "pb-32 sm:pb-24 lg:pb-0" : "pb-0"}`}>
         <Outlet />
       </main>
 
@@ -211,17 +210,19 @@ export function Layout() {
         </div>
       </footer>
 
-      <div className="fixed inset-x-4 bottom-4 z-40 lg:hidden">
-        <div className="surface-card flex items-center justify-between px-4 py-3 shadow-[0_18px_40px_rgba(23,49,62,0.18)]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">Need support now?</p>
-            <p className="text-sm text-slate-600">Talk to our oncology care team.</p>
+      {showMobileSupportBar && (
+        <div className="fixed inset-x-3 bottom-2 z-40 lg:hidden sm:inset-x-4 sm:bottom-4">
+          <div className="surface-card flex items-center justify-between gap-2.5 px-3 py-2 shadow-[0_18px_40px_rgba(23,49,62,0.18)] sm:gap-3 sm:px-4 sm:py-3">
+            <div className="min-w-0">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">Need support now?</p>
+              <p className="text-[13px] leading-4 text-slate-600 sm:text-sm sm:leading-5">Talk to our oncology care team.</p>
+            </div>
+            <Link to="/about" className="cta-primary flex-shrink-0 px-4 py-1.5 text-sm sm:px-4 sm:py-2">
+              Contact
+            </Link>
           </div>
-          <Link to="/about" className="cta-primary px-4 py-2 text-sm">
-            Contact
-          </Link>
         </div>
-      </div>
+      )}
     </div>
   );
 }
