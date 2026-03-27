@@ -4,7 +4,8 @@ import { Home } from "./components/Home";
 import { Doctors } from "./components/Doctors";
 import { DoctorDetail } from "./components/DoctorDetail";
 import { Blog } from "./components/Blog";
-import { AboutContact } from "./components/AboutContact";
+import { About } from "./components/About";
+import { Contact } from "./components/Contact";
 import { TreatmentDetail } from "./components/TreatmentDetail";
 import { Treatments } from "./components/Treatments";
 import { NotFound } from "./components/NotFound";
@@ -29,7 +30,8 @@ export const router = createBrowserRouter([
       { path: "treatments/:id/:subcategoryId", Component: TreatmentSubcategoryDetail },
       { path: "blog", Component: Blog },
       { path: "blog/:slug", Component: BlogDetail },
-      { path: "about", Component: AboutContact },
+      { path: "about", Component: About },
+      { path: "contact", Component: Contact },
       { path: "admin/login", Component: AdminLogin },
       {
         path: "admin",

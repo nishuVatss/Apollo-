@@ -49,7 +49,7 @@ export function NotFound() {
             <p className="text-sm text-gray-600">Explore our cancer care services</p>
           </Link>
           <Link
-            to="/about"
+            to="/contact"
             className="p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
           >
             <h3 className="font-bold text-gray-900 mb-2">Contact Us</h3>

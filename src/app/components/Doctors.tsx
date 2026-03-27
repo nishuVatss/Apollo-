@@ -78,7 +78,7 @@ export function Doctors() {
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-600">
             Our patient care coordinators can match you with the most relevant specialist based on diagnosis, treatment goals, and preferred schedule.
           </p>
-          <Link to="/about" className="cta-primary">
+          <Link to="/contact" className="cta-primary">
             Contact Us for Guidance
           </Link>
         </div>

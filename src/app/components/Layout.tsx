@@ -22,7 +22,8 @@ export function Layout() {
     { name: "Our Doctors", href: "/doctors" },
     { name: "Treatments", href: "/treatments" },
     { name: "Blog", href: "/blog" },
-    { name: "About & Contact", href: "/about" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const isActive = (href: string) => {
@@ -32,7 +33,7 @@ export function Layout() {
     return location.pathname.startsWith(href);
   };
 
-  const showMobileSupportBar = !location.pathname.startsWith("/about") && location.pathname !== "/";
+  const showMobileSupportBar = !location.pathname.startsWith("/about") && !location.pathname.startsWith("/contact") && location.pathname !== "/";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -95,7 +96,7 @@ export function Layout() {
                   {item.name}
                 </Link>
               ))}
-              <Link to="/about" className="cta-primary px-6 py-2.5 text-sm">
+              <Link to="/contact" className="cta-primary px-6 py-2.5 text-sm">
                 Book Appointment
               </Link>
             </div>
@@ -128,7 +129,7 @@ export function Layout() {
                   <ChevronRight className="h-4 w-4" />
                 </Link>
               ))}
-              <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="cta-primary w-full text-center">
+              <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="cta-primary w-full text-center">
                 Book Appointment
               </Link>
             </div>
@@ -171,6 +172,7 @@ export function Layout() {
                 <li><Link to="/treatments" className="transition-colors hover:text-white">Treatments</Link></li>
                 <li><Link to="/blog" className="transition-colors hover:text-white">Blog</Link></li>
                 <li><Link to="/about" className="transition-colors hover:text-white">About Us</Link></li>
+                <li><Link to="/contact" className="transition-colors hover:text-white">Contact Us</Link></li>
               </ul>
             </div>
 
@@ -217,7 +219,7 @@ export function Layout() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">Need support now?</p>
               <p className="text-[13px] leading-4 text-slate-600 sm:text-sm sm:leading-5">Talk to our oncology care team.</p>
             </div>
-            <Link to="/about" className="cta-primary flex-shrink-0 px-4 py-1.5 text-sm sm:px-4 sm:py-2">
+            <Link to="/contact" className="cta-primary flex-shrink-0 px-4 py-1.5 text-sm sm:px-4 sm:py-2">
               Contact
             </Link>
           </div>

@@ -143,7 +143,7 @@ export function Home() {
                 Apollo Athena combines expert oncology, modern surgical care, and ongoing patient support in one connected hospital experience across desktop and mobile touchpoints.
               </p>
               <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:gap-4">
-                <Link to="/about" className="cta-primary w-full sm:w-auto">
+                <Link to="/contact" className="cta-primary w-full sm:w-auto">
                   Book an Appointment
                 </Link>
                 <Link to="/doctors" className="cta-secondary w-full text-white sm:w-auto">
@@ -339,7 +339,7 @@ export function Home() {
             <p className="mx-auto mb-8 max-w-2xl text-cyan-50">
               The updated interface now carries the same calm clinical tone across desktop and mobile, with clearer actions and more immersive visual depth.
             </p>
-            <Link to="/about" className="cta-primary bg-white px-8 py-4 text-cyan-800">
+            <Link to="/contact" className="cta-primary bg-white px-8 py-4 text-cyan-800">
               Book Your Appointment
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>

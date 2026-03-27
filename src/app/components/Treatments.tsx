@@ -132,7 +132,7 @@ export function Treatments() {
           <p className="mx-auto mb-8 max-w-2xl text-cyan-50">
             Our team is available to explain procedures, likely timelines, and the specialists involved in your care.
           </p>
-          <Link to="/about" className="cta-primary bg-white px-8 py-4 text-cyan-800">
+          <Link to="/contact" className="cta-primary bg-white px-8 py-4 text-cyan-800">
             Schedule a Consultation
           </Link>
         </div>

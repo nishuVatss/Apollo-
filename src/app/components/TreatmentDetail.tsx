@@ -191,7 +191,7 @@ export function TreatmentDetail() {
                     Our medical team is here to discuss your treatment options and answer all your questions.
                   </p>
                   <Link
-                    to="/about"
+                    to="/contact"
                     className="block w-full px-6 py-3 bg-white text-blue-600 rounded-full text-center font-semibold hover:shadow-xl transition-all"
                   >
                     Book Appointment

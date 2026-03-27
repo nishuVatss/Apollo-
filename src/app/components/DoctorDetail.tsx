@@ -78,7 +78,7 @@ export function DoctorDetail() {
                     </div>
 
                     <Link
-                      to="/about"
+                      to="/contact"
                       className="block w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-center font-semibold hover:shadow-lg transition-all"
                     >
                       Book Appointment
